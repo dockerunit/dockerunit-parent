@@ -2,25 +2,34 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.qzagarese</groupId>
-  <artifactId>dockerunit</artifactId>
+  <groupId>com.github.dockerunit</groupId>
+  <artifactId>dockerunit-parent</artifactId>
   <version>1.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>dockerunit</name>
-  <description>Java Framework for testing of dockerised applications and services</description>
-  <url>https://github.com/qzagarese/dockerunit</url>
+  <name>dockerunit-parent</name>
+  <description>Parent pom for dockerunit modules</description>
+  <url>https://github.com/dockerunit/dockerunit-paren</url>
 
   <developers>
     <developer>
       <name>Quirino Zagarese</name>
     </developer>
+    <developer>
+      <name>Pedro Nuno Santos</name>
+    </developer>
+    <developer>
+      <name>Vincenzo Candela</name>
+    </developer>
+    <developer>
+      <name>Francesco Sorice</name>
+    </developer>
   </developers>
 
   <scm>
-    <connection>scm:http://github.com/qzagarese/dockerunit.git</connection>
-    <developerConnection>scm:http://github.com/qzagarese/dockerunit.git</developerConnection>
-    <url>http://github.com/qzagarese/dockerunit.git</url>
+    <connection>scm:https://github.com/dockerunit/dockerunit-parent.git</connection>
+    <developerConnection>scm:https://github.com/dockerunit/dockerunit-parent.git</developerConnection>
+    <url>https://github.com/dockerunit/dockerunit-parent.git</url>
   </scm>
 
   <properties>
@@ -41,11 +50,6 @@
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
-
-  <modules>
-    <module>dockerunit-core</module>
-    <module>dockerunit-consul</module>
-  </modules>
 
   <build>
     <pluginManagement>
