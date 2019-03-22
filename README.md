@@ -28,14 +28,14 @@ You can enable Dockerunit by adding the following dependencies to you POM file
 (set `dockerunit.version` property to the version you intend to use).
 ```xml
 <dependency>
-  <groupId>com.github.qzagarese</groupId>
+  <groupId>com.github.dockerunit</groupId>
   <artifactId>dockerunit-core</artifactId>
   <version>${dockerunit.version}</version>
   <scope>test</scope>
 </dependency>
 
 <dependency>
-  <groupId>com.github.qzagarese</groupId>
+  <groupId>com.github.dockerunit</groupId>
   <artifactId>dockerunit-consul</artifactId>
   <version>${dockerunit.version}</version>
   <scope>test</scope>
@@ -53,10 +53,10 @@ Docker containers, given a Docker image that you have previously created.
 Here is a simple descriptor for a Spring service that is listening on port 8080.
 
 ```java
-import com.github.qzagarese.dockerunit.annotation.Image;
-import com.github.qzagarese.dockerunit.annotation.Named;
-import com.github.qzagarese.dockerunit.annotation.PortBinding;
-import com.github.qzagarese.dockerunit.discovery.consul.annotation.WebHealthCheck;
+import com.github.dockerunit.annotation.Image;
+import com.github.dockerunit.annotation.Named;
+import com.github.dockerunit.annotation.PortBinding;
+import com.github.dockerunit.discovery.consul.annotation.WebHealthCheck;
 
 // Gives a name to your service. Consul will put a dns entry on `my-spring-service.service.consul`.
 @Named("my-spring-service")
@@ -118,11 +118,11 @@ Here is an example that uses `DockerUnitRunner`:
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.github.qzagarese.dockerunit.DockerUnitRunner;
-import com.github.qzagarese.dockerunit.Service;
-import com.github.qzagarese.dockerunit.ServiceContext;
-import com.github.qzagarese.dockerunit.ServiceInstance;
-import com.github.qzagarese.dockerunit.annotation.Use;
+import com.github.dockerunit.DockerUnitRunner;
+import com.github.dockerunit.Service;
+import com.github.dockerunit.ServiceContext;
+import com.github.dockerunit.ServiceInstance;
+import com.github.dockerunit.annotation.Use;
 import com.jayway.restassured.RestAssured;
 
 @RunWith(DockerUnitRunner.class) // Enables Dockerunit
@@ -155,11 +155,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Rule;
 
-import com.github.qzagarese.dockerunit.DockerUnitRule;
-import com.github.qzagarese.dockerunit.Service;
-import com.github.qzagarese.dockerunit.ServiceContext;
-import com.github.qzagarese.dockerunit.ServiceInstance;
-import com.github.qzagarese.dockerunit.annotation.Use;
+import com.github.dockerunit.DockerUnitRule;
+import com.github.dockerunit.Service;
+import com.github.dockerunit.ServiceContext;
+import com.github.dockerunit.ServiceInstance;
+import com.github.dockerunit.annotation.Use;
 import com.jayway.restassured.RestAssured;
 
 @Use(service=MyServiceDescriptor.class) // Selects the previously defined descriptor
@@ -204,5 +204,5 @@ services and endpoints to hit.
 4. It cleans up the containers after the the test execution (also when the 
 test fails unexpectedly).
   
-What next? You can look at some examples [here](./examples/).
+What next? You can look at some examples [here](https://github.com/dockerunit/examples).
   
