@@ -1,18 +1,17 @@
-# Dockerunit - JUnit for Docker containers
+# Dockerunit - Reliable testing for Docker containers
 
 Dockerunit is an extensible framework for testing of dockerised services and 
 applications.
-It is based on JUnit and it allows linking of Docker images to Java tests by 
+It works well with JUnit and it allows linking of Docker images to Java tests by 
 means of Java annotations.
 You can think of Dockerunit as of a docker-compose for Java tests.
 
 Dockerunit leverages useful tools like 
-[docker-java](https://github.com/docker-java/docker-java), 
-[Consul](https://www.consul.io/) and 
-[registrator](https://github.com/gliderlabs/registrator) to provide the 
+[docker-java](https://github.com/docker-java/docker-java) and 
+[Consul](https://www.consul.io/) and to provide the 
 following main features:
 1. Automatic pull of images referencing a registry.
-2. Service discovery based on Consul + registrator (alternative discovery 
+2. Service discovery based on Consul (alternative discovery 
 providers can be plugged in).
 3. Container port mapping.
 4. Volume mapping allowing relative paths from test classpath, so you can 
@@ -41,43 +40,52 @@ You can enable Dockerunit by adding the following dependencies to you POM file
   <scope>test</scope>
 </dependency>
 ```
+At the moment, Dockerunit only supports JUnit 4 and frameworks like Spock that rely on it, 
+so the following dependency is also needed:
+
+```xml
+<dependency>
+  <groupId>com.github.dockerunit</groupId>
+  <artifactId>dockerunit-junit4</artifactId>
+  <version>${dockerunit.version}</version>
+  <scope>test</scope>
+</dependency>
+```
+
+We are building support for Junit 5 and further testing frameworks.
 
 ## How it works
 Building tests with Dockerunit consists of two main steps:
-1. Defining your service descriptor.
-2. Using your service from your test.
+1. Defining your service descriptors.
+2. Using your services from your test.
 
 ### 1. Defining your service descriptor
 A service descriptor is a class that instructs Dockerunit about how to create 
-Docker containers, given a Docker image that you have previously created.
+Docker containers, given a pre-created Docker image.
 Here is a simple descriptor for a Spring service that is listening on port 8080.
 
 ```java
-import com.github.dockerunit.annotation.Image;
-import com.github.dockerunit.annotation.Named;
-import com.github.dockerunit.annotation.PortBinding;
+import com.github.dockerunit.core.annotation.Svc;
+import com.github.dockerunit.core.annotation.PublishPort;
 import com.github.dockerunit.discovery.consul.annotation.WebHealthCheck;
 
 // Gives a name to your service. Consul will put a dns entry on `my-spring-service.service.consul`.
-@Named("my-spring-service")
-
-// Selects the Docker image to use. It can contain a registry name.
-@Image("my-spring-service-image:latest")      
+// It also selects the Docker image to use, which can reference a Docker registry.
+@Svc(name = "my-spring-service", image = "my-spring-service-image:latest")
 
 /* Maps the container port 8080 on the same host port number 
 (equivalent to `docker run -p 8080:8080 my-spring-service-image:latest`) */ 
-@PortBinding(exposedPort=8080, hostPort=8080) 
+@PublishPort(host = 8080, container = 8080) 
 
 /* Tells Consul how to monitor the state of your service. 
-You should always provide a health check endpoint. 
-If not, Dockerunit cannot guarantee that your service has started successfully, 
-before your test invokes its endpoints. */  
-@WebHealthCheck(exposedPort=8080, endpoint="/health-check")
+It is necessary to provide a health check endpoint for Dockerunit 
+to perform service discovery. */  
+@WebHealthCheck(port = 8080, endpoint = "/health-check")
 public class MyServiceDescriptor {
 }
 ```
 
-### 2. Using your service from your test
+### 2. Using your service from your JUnit test
 
 There are two ways to enable Dockerunit in your tests:
 
@@ -110,7 +118,7 @@ testing frameworks.
 It's now time to write an actual test.
 The following examples use RestAssured, but you can choose any library to hit 
 your endpoints.
-We are testing that our service starts correctly and the health-check responds 
+We are testing that our service starts correctly and that the health-check responds 
 with a 200 status code.
 
 Here is an example that uses `DockerUnitRunner`:
@@ -118,18 +126,18 @@ Here is an example that uses `DockerUnitRunner`:
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.github.dockerunit.DockerUnitRunner;
-import com.github.dockerunit.Service;
-import com.github.dockerunit.ServiceContext;
-import com.github.dockerunit.ServiceInstance;
-import com.github.dockerunit.annotation.Use;
+import com.github.dockerunit.junit4.DockerUnitRunner;
+import com.github.dockerunit.core.Service;
+import com.github.dockerunit.core.ServiceContext;
+import com.github.dockerunit.core.ServiceInstance;
+import com.github.dockerunit.core.annotation.WithSvc;
 import com.jayway.restassured.RestAssured;
 
 @RunWith(DockerUnitRunner.class) // Enables Dockerunit
 public class MyServiceTest {
 
 	@Test
-	@Use(service=MyServiceDescriptor.class) // Selects the previously defined descriptor
+	@WithSvc(svc = MyServiceDescriptor.class) // Selects the previously defined descriptor
 	public void healthCheckShouldReturn200(ServiceContext context) {
 		// Gets the service based on value in the @Named annotation
 		Service s = context.getService("my-spring-service"); 
@@ -155,14 +163,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Rule;
 
-import com.github.dockerunit.DockerUnitRule;
-import com.github.dockerunit.Service;
-import com.github.dockerunit.ServiceContext;
-import com.github.dockerunit.ServiceInstance;
-import com.github.dockerunit.annotation.Use;
+import com.github.dockerunit.junit4.DockerUnitRule;
+import com.github.dockerunit.core.Service;
+import com.github.dockerunit.core.ServiceContext;
+import com.github.dockerunit.core.ServiceInstance;
+import com.github.dockerunit.core.annotation.WithSvc;
 import com.jayway.restassured.RestAssured;
 
-@Use(service=MyServiceDescriptor.class) // Selects the previously defined descriptor
+@WithSvc(svc = MyServiceDescriptor.class) // Selects the previously defined descriptor
 public class MyServiceTest {
 
 	@Rule
