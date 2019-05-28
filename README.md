@@ -80,7 +80,7 @@ import com.github.dockerunit.discovery.consul.annotation.WebHealthCheck;
 /* Tells Consul how to monitor the state of your service. 
 It is necessary to provide a health check endpoint for Dockerunit 
 to perform service discovery. */  
-@WebHealthCheck(exposedPort = 8080, endpoint = "/health-check")
+@WebHealthCheck(port = 8080, endpoint = "/health-check")
 public class MyServiceDescriptor {
 }
 ```
