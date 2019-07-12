@@ -1,4 +1,6 @@
 # Dockerunit - JUnit for Docker containers
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdockerunit%2Fdockerunit-parent.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdockerunit%2Fdockerunit-parent?ref=badge_shield)
+
 
 Dockerunit is an extensible framework for testing of dockerised services and 
 applications.
@@ -206,3 +208,7 @@ test fails unexpectedly).
   
 What next? You can look at some examples [here](https://github.com/dockerunit/examples).
   
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdockerunit%2Fdockerunit-parent.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdockerunit%2Fdockerunit-parent?ref=badge_large)
