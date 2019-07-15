@@ -4,9 +4,9 @@
 
 [![Codacy](https://img.shields.io/codacy/grade/d5951aa9fa5448c0bb6706567eac4f5a.svg?style=flat&label=codacy)](https://www.codacy.com/app/dockerunit/dockerunit-parent)
 &nbsp;
-[![LGTM](https://img.shields.io/lgtm/grade/java/github/dockerunit/lgtm-parent-pom.svg?style=flat&label=lgtm)](https://lgtm.com/projects/g/dockerunit/lgtm-parent-pom/context:java)
+[![LGTM](https://img.shields.io/lgtm/grade/java/github/dockerunit/dockerunit-parent.svg?style=flat&label=lgtm)](https://lgtm.com/projects/g/dockerunit/dockerunit-parent/context:java)
 &nbsp;
-[![LGTM](https://img.shields.io/lgtm/alerts/github/dockerunit/lgtm-parent-pom.svg?style=flat)](https://lgtm.com/projects/g/dockerunit/lgtm-parent-pom/alerts)
+[![LGTM](https://img.shields.io/lgtm/alerts/github/dockerunit/dockerunit-parent.svg?style=flat)](https://lgtm.com/projects/g/dockerunit/dockerunit-parent/alerts)
 
 [![Maven](https://img.shields.io/maven-central/v/com.github.dockerunit/dockerunit-parent.svg?style=flat)](https://search.maven.org/search?q=g:com.github.dockerunit%20AND%20a:dockerunit-parent&core=gav)
 &nbsp;
