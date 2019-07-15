@@ -1,6 +1,8 @@
 [![CircleCI](https://img.shields.io/circleci/build/gh/dockerunit/dockerunit-parent/master.svg?style=flat)](https://circleci.com/gh/dockerunit/dockerunit-parent/tree/master)
 &nbsp;
 [![License](https://img.shields.io/github/license/dockerunit/dockerunit-parent.svg?style=flat)](https://choosealicense.com/licenses/apache-2.0/)
+&nbsp;
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdockerunit%2Fdockerunit-parent.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdockerunit%2Fdockerunit-parent?ref=badge_shield)
 
 [![Codacy](https://img.shields.io/codacy/grade/d5951aa9fa5448c0bb6706567eac4f5a.svg?style=flat&label=codacy)](https://www.codacy.com/app/dockerunit/dockerunit-parent)
 &nbsp;
@@ -220,3 +222,5 @@ test fails unexpectedly).
 
 What next? You can look at some examples [here](https://github.com/dockerunit/examples).
 
+# License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdockerunit%2Fdockerunit-parent.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdockerunit%2Fdockerunit-parent?ref=badge_large)
