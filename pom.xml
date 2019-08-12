@@ -51,7 +51,7 @@
     <jacoco.exec.datafile>${project.build.directory}/coverage-reports/jacoco-ut.exec</jacoco.exec.datafile>
 
     <!-- Dependency Management -->
-    <slf4j.version>1.7.26</slf4j.version>
+    <slf4j.version>1.7.28</slf4j.version>
 
     <!-- Maven Plugins -->
     <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
