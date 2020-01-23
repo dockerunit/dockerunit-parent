@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+  
+  <name>Dockerunit Parent Pom</name>
+  
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.dockerunit</groupId>
@@ -17,7 +19,26 @@
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
-
+  
+  <developers>
+    <developer>
+      <id>qzagarese</id>
+      <name>Quirino Zagarese</name>
+    </developer>
+    <developer>
+      <id>pnsantos</id>
+      <name>Pedro Nuno Santos</name>
+    </developer>
+    <developer>
+      <id>irotech</id>
+      <name>Vincenzo Candela</name>
+    </developer>
+    <developer>
+      <id>DarthSeppius</id>
+      <name>Francesco Sorice</name>
+    </developer>
+  </developers>
+  
   <scm>
     <connection>scm:https://github.com/dockerunit/dockerunit-parent.git</connection>
     <developerConnection>scm:https://github.com/dockerunit/dockerunit-parent.git</developerConnection>
