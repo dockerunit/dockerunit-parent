@@ -90,7 +90,7 @@
     <maven-site-plugin.version>3.8.2</maven-site-plugin.version>
 
     <!-- Other Plugins -->
-    <flatten-maven-plugin.version>1.2.1</flatten-maven-plugin.version>
+    <flatten-maven-plugin.version>1.2.3</flatten-maven-plugin.version>
     <enforcer-extra-rules.version>1.2</enforcer-extra-rules.version>
     <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
     <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
