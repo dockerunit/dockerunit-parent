@@ -67,26 +67,24 @@ Docker containers, given a Docker image that you have previously created.
 Here is a simple descriptor for a Spring service that is listening on port 8080.
 
 ```java
-import com.github.dockerunit.annotation.Image;
-import com.github.dockerunit.annotation.Named;
-import com.github.dockerunit.annotation.PortBinding;
+import com.github.dockerunit.core.annotation.Svc;
+import com.github.dockerunit.core.annotation.PublishPorts;
+import com.github.dockerunit.discovery.consul.annotation.UseConsulDns;
 import com.github.dockerunit.discovery.consul.annotation.WebHealthCheck;
 
-// Gives a name to your service. Consul will put a dns entry on `my-spring-service.service.consul`.
-@Named("my-spring-service")
+/* Tells Docker which image to run and the name is used by Consul to register a dns entry 
+on `my-spring-service.service.consul`. */
+@Svc(name = "my-spring-service", image = "my-spring-service-image:latest")
 
-// Selects the Docker image to use. It can contain a registry name.
-@Image("my-spring-service-image:latest")
-
-/* Maps the container port 8080 on the same host port number
-(equivalent to `docker run -p 8080:8080 my-spring-service-image:latest`) */
-@PortBinding(exposedPort=8080, hostPort=8080)
+/* Tells Docker to map every port that is exposed by the container to a random port 
+on the host network interface. (Equivalent to `docker run -P) */
+@PublishPorts
 
 /* Tells Consul how to monitor the state of your service.
 You should always provide a health check endpoint.
 If not, Dockerunit cannot guarantee that your service has started successfully,
 before your test invokes its endpoints. */
-@WebHealthCheck(exposedPort=8080, endpoint="/health-check")
+@WebHealthCheck(endpoint = "/health-check", port = 8080)
 public class MyServiceDescriptor {
 }
 ```
@@ -143,7 +141,7 @@ import com.jayway.restassured.RestAssured;
 public class MyServiceTest {
 
 	@Test
-	@Use(service=MyServiceDescriptor.class) // Selects the previously defined descriptor
+	@WithSvc(svc = MyServiceDescriptor.class, containerNamePrefix = "my-spring-service")
 	public void healthCheckShouldReturn200(ServiceContext context) {
 		// Gets the service based on value in the @Named annotation
 		Service s = context.getService("my-spring-service");
@@ -173,10 +171,10 @@ import com.github.dockerunit.DockerUnitRule;
 import com.github.dockerunit.Service;
 import com.github.dockerunit.ServiceContext;
 import com.github.dockerunit.ServiceInstance;
-import com.github.dockerunit.annotation.Use;
+import com.github.dockerunit.core.annotation.WithSvc;
 import com.jayway.restassured.RestAssured;
 
-@Use(service=MyServiceDescriptor.class) // Selects the previously defined descriptor
+@WithSvc(svc =  MyServiceDescriptor.class) // Selects the previously defined descriptor
 public class MyServiceTest {
 
 	@Rule
